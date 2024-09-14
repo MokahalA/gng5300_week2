@@ -102,3 +102,82 @@ def main():
 
 ###############################################
 
+# Global variable
+global_var = "I am a global variable"
+
+def demonstrate_scope():
+    local_var = "I am a local variable"
+    print("Inside function:")
+    print(local_var)  # Local variable
+    print(global_var)  # Global variable
+
+def modify_global():
+    global global_var
+    global_var = "I have been modified globally"
+
+print("Before modifying global variable:")
+demonstrate_scope()
+
+modify_global()
+
+print("\nAfter modifying global variable:")
+demonstrate_scope()
+
+
+#######################################
+
+class StudentGrades:
+    def __init__(self):
+        self.student_grades = {}
+
+    def add_student(self):
+        student_name = input("Enter the student's name: ")
+        if student_name in self.student_grades:
+            print(f"{student_name} is already in the system.")
+        else:
+            self.student_grades[student_name] = []
+            print(f"{student_name} has been added.")
+
+    def add_student_grade(self):
+        student_name = input("Enter the student's name: ")
+        if student_name not in self.student_grades:
+            print(f"{student_name} is not in the system. Please add the student first.")
+            return
+        
+        grade = input("Enter the student's grade: ")
+        self.student_grades[student_name].append(grade)
+        print(f"Grade {grade} has been added for {student_name}.")
+
+    def print_student_grades(self):
+        student_name = input("Enter the student's name to retrieve grades: ")
+        
+        if student_name in self.student_grades:
+            print(f"{student_name}'s grades: {', '.join(self.student_grades[student_name])}")
+        else:
+            print("Student not found.")
+
+def main():
+    student_grades = StudentGrades()
+    
+    while True:
+        print("\nOptions:")
+        print("1. Add student")
+        print("2. Add student grade")
+        print("3. Print student grades")
+        print("4. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == '1':
+            student_grades.add_student()
+        elif choice == '2':
+            student_grades.add_student_grade()
+        elif choice == '3':
+            student_grades.print_student_grades()
+        elif choice == '4':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
